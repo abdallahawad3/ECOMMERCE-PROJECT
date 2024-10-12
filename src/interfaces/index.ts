@@ -1,3 +1,25 @@
+export interface IProduct {
+  id: number;
+  documentId: string;
+  title: string;
+  description: string;
+  price: number;
+  stock: number;
+  thumbnail: {
+    id: 12;
+    documentId: string;
+    name: string;
+    url: string;
+  };
+  category: [
+    {
+      id: number;
+      documentId: string;
+      title: string;
+    }
+  ];
+}
+
 export interface ILoginInput {
   email: string;
   password: string;

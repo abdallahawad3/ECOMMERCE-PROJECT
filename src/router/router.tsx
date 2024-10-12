@@ -4,7 +4,7 @@ import RootLayout from "../layouts/RootLayout";
 import DashboardLayout from "../layouts/Dashboard";
 import DashboardPage from "../pages/Dashboard";
 import AboutPage from "../pages/About";
-import CartPage from "../pages/Cart";
+import Product from "../pages/Product";
 import ContactPage from "../pages/Contact";
 import ErrorHandler from "../components/errors/ErrorHandler";
 import LoginPage from "../pages/Login";
@@ -12,7 +12,7 @@ import Register from "../pages/Register";
 import ProtectedRoutes from "../components/auth/ProtectedRoutes";
 import NotFoundPage from "../pages/NotFoundPage";
 
-const isAllowed = false;
+const isAllowed = true;
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -20,10 +20,10 @@ const router = createBrowserRouter(
       <Route path="/" element={<RootLayout />} errorElement={<ErrorHandler />}>
         <Route index element={<HomePage />} />
         <Route
-          path="cart"
+          path="product"
           element={
             <ProtectedRoutes isAllowed={isAllowed} redirectPath="/login">
-              <CartPage />
+              <Product />
             </ProtectedRoutes>
           }
         />
@@ -60,7 +60,7 @@ const router = createBrowserRouter(
           path="cart"
           element={
             <ProtectedRoutes isAllowed={isAllowed} redirectPath="/login">
-              <CartPage />
+              <Product />
             </ProtectedRoutes>
           }
         />

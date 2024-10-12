@@ -7,7 +7,7 @@ const PlayStoreBadge = () => {
         viewBox="0 0 150 45"
         fill="none"
         xmlns="http://www.w3.org/2000/svg">
-        <g clip-path="url(#prefix__clip0)">
+        <g clipPath="url(#prefix__clip0)">
           <path
             d="M144.444 44.452H5.556C2.444 44.452 0 42.008 0 38.897V5.563C0 2.453 2.444.008 5.556.008h138.888c3.112 0 5.556 2.444 5.556 5.555v33.334c0 3.11-2.444 5.555-5.556 5.555z"
             fill="#000"></path>
@@ -50,12 +50,12 @@ const PlayStoreBadge = () => {
             x2="5.574"
             y2="28.332"
             gradientUnits="userSpaceOnUse">
-            <stop stop-color="#00A0FF"></stop>
-            <stop offset="0.007" stop-color="#00A1FF"></stop>
-            <stop offset="0.26" stop-color="#00BEFF"></stop>
-            <stop offset="0.512" stop-color="#00D2FF"></stop>
-            <stop offset="0.76" stop-color="#00DFFF"></stop>
-            <stop offset="1" stop-color="#00E3FF"></stop>
+            <stop stopColor="#00A0FF"></stop>
+            <stop offset="0.007" stopColor="#00A1FF"></stop>
+            <stop offset="0.26" stopColor="#00BEFF"></stop>
+            <stop offset="0.512" stopColor="#00D2FF"></stop>
+            <stop offset="0.76" stopColor="#00DFFF"></stop>
+            <stop offset="1" stopColor="#00E3FF"></stop>
           </linearGradient>
           <linearGradient
             id="prefix__paint1_linear"
@@ -64,10 +64,10 @@ const PlayStoreBadge = () => {
             x2="10.708"
             y2="22.231"
             gradientUnits="userSpaceOnUse">
-            <stop stop-color="#FFE000"></stop>
-            <stop offset="0.409" stop-color="#FFBD00"></stop>
-            <stop offset="0.775" stop-color="orange"></stop>
-            <stop offset="1" stop-color="#FF9C00"></stop>
+            <stop stopColor="#FFE000"></stop>
+            <stop offset="0.409" stopColor="#FFBD00"></stop>
+            <stop offset="0.775" stopColor="orange"></stop>
+            <stop offset="1" stopColor="#FF9C00"></stop>
           </linearGradient>
           <linearGradient
             id="prefix__paint2_linear"
@@ -76,8 +76,8 @@ const PlayStoreBadge = () => {
             x2="2.299"
             y2="50.068"
             gradientUnits="userSpaceOnUse">
-            <stop stop-color="#FF3A44"></stop>
-            <stop offset="1" stop-color="#C31162"></stop>
+            <stop stopColor="#FF3A44"></stop>
+            <stop offset="1" stopColor="#C31162"></stop>
           </linearGradient>
           <linearGradient
             id="prefix__paint3_linear"
@@ -86,11 +86,11 @@ const PlayStoreBadge = () => {
             x2="19.4"
             y2="11.496"
             gradientUnits="userSpaceOnUse">
-            <stop stop-color="#32A071"></stop>
-            <stop offset="0.069" stop-color="#2DA771"></stop>
-            <stop offset="0.476" stop-color="#15CF74"></stop>
-            <stop offset="0.801" stop-color="#06E775"></stop>
-            <stop offset="1" stop-color="#00F076"></stop>
+            <stop stopColor="#32A071"></stop>
+            <stop offset="0.069" stopColor="#2DA771"></stop>
+            <stop offset="0.476" stopColor="#15CF74"></stop>
+            <stop offset="0.801" stopColor="#06E775"></stop>
+            <stop offset="1" stopColor="#00F076"></stop>
           </linearGradient>
           <clipPath id="prefix__clip0">
             <path fill="#fff" d="M0 0h150v44.46H0z"></path>

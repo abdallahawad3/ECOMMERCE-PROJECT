@@ -14,7 +14,8 @@ const ErrorHandler = ({ statusCode = 500, title = "Server Error" }: IProps) => {
         <div className="inline-flex rounded-full bg-red-100 p-4">
           <div className="rounded-full stroke-red-600 bg-red-200 p-4">
             <svg
-              className="w-16 h-16"
+              width={"64px "}
+              height={"64px "}
               viewBox="0 0 28 28"
               fill="none"
               xmlns="http://www.w3.org/2000/svg">
