@@ -22,7 +22,6 @@ interface IProps {
 
 const ProductCard = ({ product }: IProps) => {
   const colorMode = useColorMode();
-  console.log(import.meta.env);
   return (
     <Card shadow={"md"}>
       <CardBody>
