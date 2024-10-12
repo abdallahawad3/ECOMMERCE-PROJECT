@@ -47,7 +47,7 @@ const ProductCard = ({ product }: IProps) => {
         <ButtonGroup spacing="2" mx={"auto"}>
           <Button
             as={Link}
-            to={"/product"}
+            to={`/product/${product.documentId}`}
             width={"full"}
             variant="solid"
             colorScheme={colorMode.colorMode === "light" ? "blue" : "cyan"}>
