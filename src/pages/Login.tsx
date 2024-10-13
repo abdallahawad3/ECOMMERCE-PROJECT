@@ -10,6 +10,8 @@ import {
   Heading,
   Stack,
   Image,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -21,9 +23,12 @@ import axiosInstance from "../config/axios.config";
 import toast from "react-hot-toast";
 import type { AxiosError } from "axios";
 import { useState } from "react";
+import ErrorMessage from "../components/ErrorMessage";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -66,11 +71,20 @@ const LoginPage = () => {
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
               <Input type="email" {...register("email")} />
-              <p>{errors.email?.message}</p>
+              {errors.email?.message ? <ErrorMessage msg={errors.email?.message} /> : <></>}
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password" {...register("password")} />
+              <InputGroup>
+                <Input type={showPassword ? "text" : "password"} {...register("password")} />
+                <InputRightElement h={"full"}>
+                  <Button
+                    variant={"ghost"}
+                    onClick={() => setShowPassword((showPassword) => !showPassword)}>
+                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
             </FormControl>
             <Stack spacing={6}>
               <Stack

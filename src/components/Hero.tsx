@@ -77,8 +77,8 @@ const Hero = () => {
                 fontSize={"lg"}
                 fontFamily={"Caveat"}
                 position={"absolute"}
-                right={"-125px"}
-                top={"-15px"}
+                right={{ base: "-90px", md: "-125px" }}
+                top={{ base: "-20px", md: "-15px" }}
                 transform={"rotate(10deg)"}>
                 Starting at $15/mo
               </Text>

@@ -50,7 +50,7 @@ const Register = () => {
       if (status == 200) {
         setIsLoading(true);
         setTimeout(() => {
-          toast.success("Registration successful! Welcome aboard.👋");
+          toast.success("Registration successful! Login Now.👋");
           setIsLoading(false);
           navigate("/login");
         }, 2000);
