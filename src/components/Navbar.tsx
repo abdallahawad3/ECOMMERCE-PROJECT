@@ -34,7 +34,7 @@ const Navbar = () => {
     <>
       <Box
         bg={useColorModeValue("gray.100", "gray.900")}
-        position={"static"}
+        position={"sticky"}
         width={"100%"}
         top={0}
         left={0}

@@ -11,21 +11,20 @@ import {
   BoxProps,
   FlexProps,
 } from "@chakra-ui/react";
-import { FiHome, FiTrendingUp, FiCompass, FiStar, FiSettings, FiMenu } from "react-icons/fi";
+import { FiHome, FiTrendingUp, FiCompass, FiMenu } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
 import { Link } from "react-router-dom";
 
 interface LinkItemProps {
   name: string;
+  to: string;
   icon: IconType;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Home", icon: FiHome },
-  { name: "category", icon: FiTrendingUp },
-  { name: "Explore", icon: FiCompass },
-  { name: "Favourites", icon: FiStar },
-  { name: "Settings", icon: FiSettings },
+  { to: "/dashboard", name: "Home", icon: FiHome },
+  { to: "/dashboard/products", name: "Products", icon: FiCompass },
+  { to: "/dashboard/category", name: "Category", icon: FiTrendingUp },
 ];
 
 const DashboardSidebar = () => {
@@ -71,7 +70,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem as={Link} to={link.name} key={link.name} icon={link.icon}>
+        <NavItem as={Link} to={link.to} key={link.name} icon={link.icon}>
           {link.name}
         </NavItem>
       ))}
@@ -86,7 +85,7 @@ interface NavItemProps extends FlexProps {
 }
 const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
   return (
-    <Box as={"a"} style={{ textDecoration: "none" }} _focus={{ boxShadow: "none" }}>
+    <Box style={{ textDecoration: "none" }} _focus={{ boxShadow: "none" }}>
       <Flex
         align="center"
         p="4"

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import DashboardSidebar from "../components/DashboardSidebar";
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 
 const DashboardLayout = () => {
   return (
@@ -9,7 +9,9 @@ const DashboardLayout = () => {
       <Navbar />
       <Flex>
         <DashboardSidebar />
-        <Outlet />
+        <Box mt={20} flexGrow={1}>
+          <Outlet />
+        </Box>
       </Flex>
     </>
   );

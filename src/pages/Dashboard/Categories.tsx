@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { getAllCategories } from "../app/feature/categories/CategoriesSlice";
-import { useAppDispatch, type RootState } from "../app/store";
 import { useSelector } from "react-redux";
+import { useAppDispatch, type RootState } from "../../app/store";
+import { getAllCategories } from "../../app/feature/categories/CategoriesSlice";
 
 const CategoriesPage = () => {
   const dispatch = useAppDispatch();
