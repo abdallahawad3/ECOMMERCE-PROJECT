@@ -17,7 +17,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Input from "../components/ui/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
-import type { IErrorResponse, ILoginInput } from "../interfaces";
+import type { CookieOptions, IErrorResponse, ILoginInput } from "../interfaces";
 import { LOGIN_SCHEMA } from "../validation";
 import axiosInstance from "../config/axios.config";
 import toast from "react-hot-toast";
@@ -25,6 +25,7 @@ import type { AxiosError } from "axios";
 import { useState } from "react";
 import ErrorMessage from "../components/ErrorMessage";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import CookieService from "../services/CookieService";
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -36,14 +37,19 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<ILoginInput>({ resolver: yupResolver(LOGIN_SCHEMA) });
 
-  const onSubmit: SubmitHandler<ILoginInput> = async (data) => {
+  const onSubmit: SubmitHandler<ILoginInput> = async (loginData) => {
     try {
-      const { status } = await axiosInstance.post("/auth/local", {
-        identifier: data.email,
-        password: data.password,
+      const { data, status } = await axiosInstance.post("/auth/local", {
+        identifier: loginData.email,
+        password: loginData.password,
       });
 
       if (status === 200) {
+        const date = new Date();
+        date.setTime(date.getTime() + 1000 * 60 * 60 * 24 * 3);
+        const option: CookieOptions = { path: "/", expires: date };
+
+        CookieService.set("jwt", data.jwt, option);
         setIsLoading(true);
         setTimeout(() => {
           toast.success("You Login Success", {
