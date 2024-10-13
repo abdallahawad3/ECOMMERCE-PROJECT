@@ -1,5 +1,7 @@
+import ProductsList from "../components/ProductsList";
+
 const DashboardPage = () => {
-  return <div>Dashboard</div>;
+  return <ProductsList />;
 };
 
 export default DashboardPage;

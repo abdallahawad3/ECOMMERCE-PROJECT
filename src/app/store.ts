@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import shoppingCartSlice from "./feature/cart/CartSlice";
 import drawerSlice from "./feature/global/globalSlice";
+import categorySlice from "./feature/categories/CategoriesSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 const persistConfig = {
@@ -15,6 +16,7 @@ export const store = configureStore({
   reducer: {
     cart: persistedCart,
     drawer: drawerSlice,
+    category: categorySlice,
   },
 });
 

@@ -13,6 +13,7 @@ import ProtectedRoutes from "../components/auth/ProtectedRoutes";
 import NotFoundPage from "../pages/NotFoundPage";
 import ProductsPage from "../pages/Products";
 import CookieService from "../services/CookieService";
+import CategoriesPage from "../pages/Categories";
 
 const isAllowed = CookieService.get("jwt");
 const router = createBrowserRouter(
@@ -88,10 +89,10 @@ const router = createBrowserRouter(
           }
         />
         <Route
-          path="cart"
+          path="category"
           element={
             <ProtectedRoutes isAllowed={isAllowed} redirectPath="/login">
-              <Product />
+              <CategoriesPage />
             </ProtectedRoutes>
           }
         />

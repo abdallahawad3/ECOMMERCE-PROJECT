@@ -21,6 +21,12 @@ export interface IProduct {
   ];
 }
 
+export interface ICategory {
+  id: number;
+  documentId: string;
+  title: string;
+}
+
 export interface ILoginInput {
   email: string;
   password: string;

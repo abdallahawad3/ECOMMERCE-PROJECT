@@ -32,7 +32,13 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")}>
+      <Box
+        bg={useColorModeValue("gray.100", "gray.900")}
+        position={"static"}
+        width={"100%"}
+        top={0}
+        left={0}
+        zIndex={1000}>
         <Container maxWidth="7xl">
           <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
             <IconButton
