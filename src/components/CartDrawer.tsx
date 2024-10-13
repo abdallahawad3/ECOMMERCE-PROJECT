@@ -1,5 +1,6 @@
 import {
   Button,
+  // Divider,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -12,12 +13,18 @@ import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch, type RootState } from "../app/store";
 import { onCloseCartDrawerAction } from "../app/feature/global/globalSlice";
+import CartDrawerItem from "./CartDrawerItem";
 
 const CartDrawer = () => {
-  const { isOpenCartDrawer } = useSelector((state: RootState) => state.drawer);
+  const { isOpenCartDrawer } = useSelector((state: RootState) => {
+    return state.drawer;
+  });
+  const { products } = useSelector((state: RootState) => {
+    return state.cart;
+  });
+
   const dispatch = useAppDispatch();
   const btnRef = useRef<HTMLButtonElement>(null);
-
   return (
     <>
       <Drawer
@@ -32,7 +39,11 @@ const CartDrawer = () => {
           <DrawerCloseButton />
           <DrawerHeader>Shopping Cart</DrawerHeader>
 
-          <DrawerBody>{/* BODY */}</DrawerBody>
+          <DrawerBody>
+            {products.map((item) => (
+              <CartDrawerItem product={item} key={item.id} />
+            ))}
+          </DrawerBody>
 
           <DrawerFooter>
             <Button
