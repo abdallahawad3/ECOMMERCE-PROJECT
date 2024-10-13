@@ -11,8 +11,9 @@ import LoginPage from "../pages/Login";
 import Register from "../pages/Register";
 import ProtectedRoutes from "../components/auth/ProtectedRoutes";
 import NotFoundPage from "../pages/NotFoundPage";
+import ProductsPage from "../pages/Products";
 
-const isAllowed = true;
+const isAllowed = false;
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -24,6 +25,14 @@ const router = createBrowserRouter(
           element={
             <ProtectedRoutes isAllowed={isAllowed} redirectPath="/login">
               <Product />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="products"
+          element={
+            <ProtectedRoutes isAllowed={isAllowed} redirectPath="/login">
+              <ProductsPage />
             </ProtectedRoutes>
           }
         />
