@@ -19,7 +19,8 @@ import { Link } from "react-router-dom";
 import { logo } from "../assets/images";
 import CookieService from "../services/CookieService";
 import { useSelector } from "react-redux";
-import type { RootState } from "../app/store";
+import { useAppDispatch, type RootState } from "../app/store";
+import { onOpenCartDrawerAction } from "../app/feature/global/globalSlice";
 
 const Links = ["Dashboard", "Products", "About", "Contact"];
 
@@ -28,7 +29,7 @@ const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const isLogin = CookieService.get("jwt");
   const { products } = useSelector((state: RootState) => state.cart);
-
+  const dispatch = useAppDispatch();
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")}>
@@ -66,7 +67,12 @@ const Navbar = () => {
             <Flex alignItems={"center"}>
               {isLogin ? (
                 <>
-                  <Button>Cart ({products.length})</Button>
+                  <Button
+                    onClick={() => {
+                      dispatch(onOpenCartDrawerAction());
+                    }}>
+                    Cart ({products.length})
+                  </Button>
                   <Button mx={2} onClick={toggleColorMode}>
                     {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
                   </Button>

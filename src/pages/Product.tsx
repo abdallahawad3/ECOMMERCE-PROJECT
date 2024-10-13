@@ -21,10 +21,13 @@ import { MdArrowBack, MdLocalShipping } from "react-icons/md";
 import axiosInstance from "../config/axios.config";
 import { useEffect, useState } from "react";
 import type { IProduct } from "../interfaces";
+import { addItemsToCart } from "../app/feature/cart/CartSlice";
+import { useAppDispatch } from "../app/store";
 
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState<IProduct>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   useEffect(() => {
     (async () => {
@@ -131,6 +134,11 @@ const Product = () => {
           </Stack>
 
           <Button
+            onClick={() => {
+              {
+                if (product) dispatch(addItemsToCart(product));
+              }
+            }}
             rounded={"none"}
             w={"full"}
             mt={8}
