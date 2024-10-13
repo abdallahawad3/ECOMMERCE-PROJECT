@@ -15,16 +15,20 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { logo } from "../assets/images";
 import CookieService from "../services/CookieService";
+import { useSelector } from "react-redux";
+import type { RootState } from "../app/store";
+
 const Links = ["Dashboard", "Products", "About", "Contact"];
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
-  const navigate = useNavigate();
   const isLogin = CookieService.get("jwt");
+  const { products } = useSelector((state: RootState) => state.products);
+
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")}>
@@ -62,13 +66,14 @@ const Navbar = () => {
             <Flex alignItems={"center"}>
               {isLogin ? (
                 <>
+                  <Button>Cart ({products.length})</Button>
                   <Button mx={2} onClick={toggleColorMode}>
                     {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
                   </Button>
                   <Button
                     colorScheme="red"
                     onClick={() => {
-                      navigate("/login");
+                      window.location.assign("/");
                       CookieService.remove("jwt");
                     }}>
                     Logout

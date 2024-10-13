@@ -15,13 +15,15 @@ import { sliceText } from "../utils";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { Link } from "react-router-dom";
 import type { IProduct } from "../interfaces";
-
+import { useAppDispatch } from "../app/store";
+import { addItemsToCart } from "../app/feature/cart/CartSlice";
 interface IProps {
   product: IProduct;
 }
 
 const ProductCard = ({ product }: IProps) => {
   const colorMode = useColorMode();
+  const dispatch = useAppDispatch();
   return (
     <Card shadow={"md"}>
       <CardBody>
@@ -54,6 +56,9 @@ const ProductCard = ({ product }: IProps) => {
             Show Details
           </Button>
           <Button
+            onClick={() => {
+              dispatch(addItemsToCart(product));
+            }}
             as={Link}
             to={"/"}
             rightIcon={<MdOutlineShoppingCart />}

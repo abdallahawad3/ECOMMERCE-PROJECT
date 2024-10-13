@@ -20,7 +20,14 @@ const router = createBrowserRouter(
     <>
       {/* ROOT LAYOUT */}
       <Route path="/" element={<RootLayout />} errorElement={<ErrorHandler />}>
-        <Route index element={<HomePage />} />
+        <Route
+          index
+          element={
+            <ProtectedRoutes isAllowed={isAllowed} redirectPath="/login">
+              <HomePage />
+            </ProtectedRoutes>
+          }
+        />
         <Route
           path="product/:id"
           element={

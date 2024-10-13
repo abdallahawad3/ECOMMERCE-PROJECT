@@ -13,7 +13,7 @@ import {
   InputGroup,
   InputRightElement,
 } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Input from "../components/ui/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -30,7 +30,7 @@ import CookieService from "../services/CookieService";
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -48,7 +48,6 @@ const LoginPage = () => {
         const date = new Date();
         date.setTime(date.getTime() + 1000 * 60 * 60 * 24 * 3);
         const option: CookieOptions = { path: "/", expires: date };
-
         CookieService.set("jwt", data.jwt, option);
         setIsLoading(true);
         setTimeout(() => {
@@ -56,7 +55,7 @@ const LoginPage = () => {
             position: "top-center",
           });
           setIsLoading(false);
-          navigate("/");
+          window.location.assign("/");
         }, 2000);
       }
     } catch (error) {
