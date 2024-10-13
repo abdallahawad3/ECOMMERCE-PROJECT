@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { useAppDispatch, type RootState } from "../app/store";
 import { onCloseCartDrawerAction } from "../app/feature/global/globalSlice";
 import CartDrawerItem from "./CartDrawerItem";
+import { clearAllProducts } from "../app/feature/cart/CartSlice";
 
 const CartDrawer = () => {
   const { isOpenCartDrawer } = useSelector((state: RootState) => {
@@ -54,7 +55,13 @@ const CartDrawer = () => {
               }}>
               Cancel
             </Button>
-            <Button colorScheme="red">Clear All</Button>
+            <Button
+              onClick={() => {
+                dispatch(clearAllProducts());
+              }}
+              colorScheme="red">
+              Clear All
+            </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

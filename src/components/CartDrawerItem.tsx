@@ -11,12 +11,15 @@ import {
 } from "@chakra-ui/react";
 import type { IProduct } from "../interfaces";
 import { sliceText } from "../utils";
+import { removeItemsFromCart } from "../app/feature/cart/CartSlice";
+import { useAppDispatch } from "../app/store";
 
 interface IProps {
   product: IProduct;
 }
 
 const CartDrawerItem = ({ product }: IProps) => {
+  const dispatch = useAppDispatch();
   return (
     <>
       <Card
@@ -41,7 +44,13 @@ const CartDrawerItem = ({ product }: IProps) => {
             <Text>Quantity: {product.quantity}</Text>
           </CardBody>
           <CardFooter py={2} px={0}>
-            <Button py={"1px"} variant="outline" colorScheme="red">
+            <Button
+              onClick={() => {
+                dispatch(removeItemsFromCart(product));
+              }}
+              py={"1px"}
+              variant="outline"
+              colorScheme="red">
               Remove
             </Button>
           </CardFooter>
