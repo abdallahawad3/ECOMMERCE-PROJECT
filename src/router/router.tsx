@@ -12,8 +12,9 @@ import Register from "../pages/Register";
 import ProtectedRoutes from "../components/auth/ProtectedRoutes";
 import NotFoundPage from "../pages/NotFoundPage";
 import ProductsPage from "../pages/Products";
+import CookieService from "../services/CookieService";
 
-const isAllowed = false;
+const isAllowed = CookieService.get("jwt");
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -52,8 +53,22 @@ const router = createBrowserRouter(
             </ProtectedRoutes>
           }
         />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<Register />} />
+        <Route
+          path="login"
+          element={
+            <ProtectedRoutes isAllowed={!isAllowed} redirectPath="/">
+              <LoginPage />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="register"
+          element={
+            <ProtectedRoutes isAllowed={!isAllowed} redirectPath="/">
+              <Register />
+            </ProtectedRoutes>
+          }
+        />
       </Route>
       {/* Dashboard Layout */}
       <Route path="/dashboard" element={<DashboardLayout />}>

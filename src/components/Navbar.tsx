@@ -17,13 +17,14 @@ import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 import { Link } from "react-router-dom";
 import { logo } from "../assets/images";
+import CookieService from "../services/CookieService";
 const Links = ["Dashboard", "Products", "About", "Contact"];
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const isLogin = true;
+  const isLogin = CookieService.get("jwt");
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")}>
