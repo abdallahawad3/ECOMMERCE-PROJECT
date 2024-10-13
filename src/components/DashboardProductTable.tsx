@@ -1,51 +1,63 @@
-import {
-  Table,
-  TableCaption,
-  TableContainer,
-  Tbody,
-  Td,
-  Tfoot,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react";
+import { Button, Image, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { sliceText } from "../utils";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useAppDispatch, type RootState } from "../app/store";
+import { getAllProducts } from "../app/feature/dashboardProducts/productsSlice";
+import TableSkelton from "./TableSkelton";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 const DashboardProductTable = () => {
+  const { products, loading } = useSelector((state: RootState) => state.products);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
+  if (loading) return <TableSkelton />;
   return (
-    <TableContainer>
+    <TableContainer w={"90%"} mx={"auto"}>
       <Table variant="simple">
-        <TableCaption>Imperial to metric conversion factors</TableCaption>
         <Thead>
           <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
+            <Th>ID</Th>
+            <Th>Title</Th>
+            <Th>Category</Th>
+            <Th>Thumbnail</Th>
+            <Th>Price</Th>
+            <Th>Stock</Th>
+            <Th>Action</Th>
           </Tr>
         </Thead>
-        <Tbody>
-          <Tr>
-            <Td>inches</Td>
-            <Td>millimetres (mm)</Td>
-            <Td isNumeric>25.4</Td>
-          </Tr>
-          <Tr>
-            <Td>feet</Td>
-            <Td>centimetres (cm)</Td>
-            <Td isNumeric>30.48</Td>
-          </Tr>
-          <Tr>
-            <Td>yards</Td>
-            <Td>metres (m)</Td>
-            <Td isNumeric>0.91444</Td>
-          </Tr>
+        <Tbody textAlign={"center"}>
+          {products.map((ele) => (
+            <Tr key={ele.id}>
+              <Td>{ele.id}</Td>
+              <Td>{sliceText(ele.title, 10)}</Td>
+              <Td>{ele.category[0].title}</Td>
+              <Td>
+                <Image
+                  src={`http://localhost:1337${ele.thumbnail.url}`}
+                  alt={`${ele.thumbnail.name}`}
+                  borderRadius="md"
+                  width={"40px"}
+                  height={"40px"}
+                  rounded={"full"}
+                />
+              </Td>
+              <Td>{ele.price}</Td>
+              <Td>{ele.stock}</Td>
+              <Td>
+                <Button mx={2} colorScheme="red">
+                  <MdDelete />
+                </Button>
+                <Button colorScheme="blue">
+                  <MdEdit />
+                </Button>
+              </Td>
+            </Tr>
+          ))}
         </Tbody>
-        <Tfoot>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
-          </Tr>
-        </Tfoot>
       </Table>
     </TableContainer>
   );
