@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logo } from "../assets/images";
 import CookieService from "../services/CookieService";
 const Links = ["Dashboard", "Products", "About", "Contact"];
@@ -23,7 +23,7 @@ const Links = ["Dashboard", "Products", "About", "Contact"];
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
-
+  const navigate = useNavigate();
   const isLogin = CookieService.get("jwt");
   return (
     <>
@@ -65,7 +65,14 @@ const Navbar = () => {
                   <Button mx={2} onClick={toggleColorMode}>
                     {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
                   </Button>
-                  <Button colorScheme="red">Logout</Button>
+                  <Button
+                    colorScheme="red"
+                    onClick={() => {
+                      navigate("/login");
+                      CookieService.remove("jwt");
+                    }}>
+                    Logout
+                  </Button>
                 </>
               ) : (
                 <>

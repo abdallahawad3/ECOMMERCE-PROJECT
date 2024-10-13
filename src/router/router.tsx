@@ -53,23 +53,23 @@ const router = createBrowserRouter(
             </ProtectedRoutes>
           }
         />
-        <Route
-          path="login"
-          element={
-            <ProtectedRoutes isAllowed={!isAllowed} redirectPath="/">
-              <LoginPage />
-            </ProtectedRoutes>
-          }
-        />
-        <Route
-          path="register"
-          element={
-            <ProtectedRoutes isAllowed={!isAllowed} redirectPath="/">
-              <Register />
-            </ProtectedRoutes>
-          }
-        />
       </Route>
+      <Route
+        path="login"
+        element={
+          <ProtectedRoutes isAllowed={!isAllowed} redirectPath="/">
+            <LoginPage />
+          </ProtectedRoutes>
+        }
+      />
+      <Route
+        path="register"
+        element={
+          <ProtectedRoutes isAllowed={!isAllowed} redirectPath="/">
+            <Register />
+          </ProtectedRoutes>
+        }
+      />
       {/* Dashboard Layout */}
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route
