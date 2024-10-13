@@ -27,7 +27,7 @@ const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const isLogin = CookieService.get("jwt");
-  const { products } = useSelector((state: RootState) => state.products);
+  const { products } = useSelector((state: RootState) => state.cart);
 
   return (
     <>

@@ -26,7 +26,6 @@ const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState<IProduct>();
   const navigate = useNavigate();
-  console.log(product);
   useEffect(() => {
     (async () => {
       try {

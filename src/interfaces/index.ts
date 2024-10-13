@@ -1,5 +1,6 @@
 export interface IProduct {
   id: number;
+  quantity: number;
   documentId: string;
   title: string;
   description: string;

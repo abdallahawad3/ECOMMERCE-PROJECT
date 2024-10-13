@@ -1,24 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { IProduct } from "../../../interfaces";
+import { addItemToShoppingCart } from "../../../utils";
 
 interface CartState {
   products: IProduct[];
 }
 
-// Define the initial state using that type
 const initialState: CartState = {
   products: [],
 };
 
-export const cartSlice = createSlice({
-  name: "products",
+export const shoppingCartSlice = createSlice({
+  name: "cart",
   initialState,
   reducers: {
-    addItemsToCart: (state, action) => {
-      state.products = [...state.products, action.payload];
+    addItemsToCart: (state, action: PayloadAction<IProduct>) => {
+      state.products = addItemToShoppingCart(state.products, action.payload);
     },
   },
 });
 
-export const { addItemsToCart } = cartSlice.actions;
-export default cartSlice.reducer;
+export const { addItemsToCart } = shoppingCartSlice.actions;
+export default shoppingCartSlice.reducer;
