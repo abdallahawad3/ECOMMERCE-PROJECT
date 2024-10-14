@@ -5,7 +5,7 @@ import globalSlice from "./feature/global/globalSlice";
 import categorySlice from "./feature/categories/CategoriesSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import apiSlice from "../app/feature/dashboardProducts/productsSlice";
+import apiSlice from "../app/feature/services/apiSlice";
 const persistConfig = {
   key: "cart",
   storage,

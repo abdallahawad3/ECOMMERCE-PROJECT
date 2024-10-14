@@ -6,7 +6,7 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { onOpenDialogAction } from "../app/feature/global/globalSlice";
 import Dialog from "./ui/Dialog";
 import { useAppDispatch } from "../app/store";
-import { useGetDashboardProductsQuery } from "../app/feature/dashboardProducts/productsSlice";
+import { useGetDashboardProductsQuery } from "../app/feature/services/apiSlice";
 import type { IProduct } from "../interfaces";
 
 const DashboardProductTable = () => {
