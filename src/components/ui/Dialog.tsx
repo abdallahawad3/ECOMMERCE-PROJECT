@@ -12,13 +12,16 @@ import React, { type ReactNode } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch, type RootState } from "../../app/store";
 import { onCloseDialogAction } from "../../app/feature/global/globalSlice";
+// import { useDeleteDashboardProductMutation } from "../../app/feature/services/apiSlice";
 interface IProps {
   title: string;
   body: ReactNode;
   className?: string;
+  onDeleteHandler: () => void;
+  isLoading: boolean;
 }
 
-const Dialog = ({ body, title, className }: IProps) => {
+const Dialog = ({ body, title, className, onDeleteHandler, isLoading }: IProps) => {
   const { isOpenDialog } = useSelector((state: RootState) => state.global);
   const dispatch = useAppDispatch();
   const cancelRef = React.useRef(null);
@@ -49,9 +52,12 @@ const Dialog = ({ body, title, className }: IProps) => {
             <Button
               onClick={() => {
                 dispatch(onCloseDialogAction());
+                onDeleteHandler();
               }}
               colorScheme="red"
-              ml={3}>
+              ml={3}
+              isLoading={isLoading}
+              loadingText="Loading">
               Delete
             </Button>
           </AlertDialogFooter>
