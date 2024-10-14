@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logo } from "../assets/images";
 import CookieService from "../services/CookieService";
 import { useSelector } from "react-redux";
@@ -26,6 +26,7 @@ const Links = ["Dashboard", "Products", "About", "Contact"];
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
   const isLogin = CookieService.get("jwt");
   const { products } = useSelector((state: RootState) => state.cart);
@@ -85,8 +86,9 @@ const Navbar = () => {
                   <Button
                     colorScheme="red"
                     onClick={() => {
-                      window.location.assign("/");
                       CookieService.remove("jwt");
+                      navigate("/login");
+                      window.location.reload();
                     }}>
                     Logout
                   </Button>
