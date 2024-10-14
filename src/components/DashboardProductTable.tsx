@@ -1,20 +1,19 @@
 import { Button, Image, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import { sliceText } from "../utils";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useAppDispatch, type RootState } from "../app/store";
-import { getAllProducts } from "../app/feature/dashboardProducts/productsSlice";
+import { Fragment } from "react";
 import TableSkelton from "./TableSkelton";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { onOpenDialogAction } from "../app/feature/global/globalSlice";
+import Dialog from "./ui/Dialog";
+import { useAppDispatch } from "../app/store";
+import { useGetDashboardProductsQuery } from "../app/feature/dashboardProducts/productsSlice";
+import type { IProduct } from "../interfaces";
 
 const DashboardProductTable = () => {
-  const { products, loading } = useSelector((state: RootState) => state.products);
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
+  const { data, isLoading } = useGetDashboardProductsQuery({});
 
-  if (loading) return <TableSkelton />;
+  if (isLoading) return <TableSkelton />;
   return (
     <TableContainer w={"90%"} mx={"auto"}>
       <Table variant="simple">
@@ -30,33 +29,48 @@ const DashboardProductTable = () => {
           </Tr>
         </Thead>
         <Tbody textAlign={"center"}>
-          {products.map((ele) => (
-            <Tr key={ele.id}>
-              <Td>{ele.id}</Td>
-              <Td>{sliceText(ele.title, 10)}</Td>
-              <Td>{ele.category[0].title}</Td>
-              <Td>
-                <Image
-                  src={`http://localhost:1337${ele.thumbnail.url}`}
-                  alt={`${ele.thumbnail.name}`}
-                  borderRadius="md"
-                  width={"40px"}
-                  height={"40px"}
-                  rounded={"full"}
-                />
-              </Td>
-              <Td>{ele.price}</Td>
-              <Td>{ele.stock}</Td>
-              <Td>
-                <Button mx={2} colorScheme="red">
-                  <MdDelete />
-                </Button>
-                <Button colorScheme="blue">
-                  <MdEdit />
-                </Button>
-              </Td>
-            </Tr>
-          ))}
+          {data.data &&
+            data?.data?.map((ele: IProduct) => (
+              <Fragment key={ele.id}>
+                <Tr>
+                  <Td>{ele.id}</Td>
+                  <Td>{sliceText(ele.title, 10)}</Td>
+                  <Td>{ele.category[0].title}</Td>
+                  <Td>
+                    <Image
+                      src={`http://localhost:1337${ele.thumbnail.url}`}
+                      alt={`${ele.thumbnail.name}`}
+                      borderRadius="md"
+                      width={"40px"}
+                      height={"40px"}
+                      rounded={"full"}
+                    />
+                  </Td>
+                  <Td>{ele.price}</Td>
+                  <Td>{ele.stock}</Td>
+                  <Td>
+                    <Button
+                      onClick={() => {
+                        dispatch(onOpenDialogAction());
+                      }}
+                      mx={2}
+                      colorScheme="red">
+                      <MdDelete />
+                    </Button>
+                    <Button colorScheme="blue">
+                      <MdEdit />
+                    </Button>
+                  </Td>
+                  <Td>
+                    <Dialog
+                      body="Are you sure you want to delete this product? This action cannot be undone."
+                      title="Delete Product"
+                      className="text-red-500"
+                    />
+                  </Td>
+                </Tr>
+              </Fragment>
+            ))}
         </Tbody>
       </Table>
     </TableContainer>

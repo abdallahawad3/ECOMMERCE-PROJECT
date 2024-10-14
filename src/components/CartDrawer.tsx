@@ -18,7 +18,7 @@ import { clearAllProducts } from "../app/feature/cart/CartSlice";
 
 const CartDrawer = () => {
   const { isOpenCartDrawer } = useSelector((state: RootState) => {
-    return state.drawer;
+    return state.global;
   });
   const { products } = useSelector((state: RootState) => {
     return state.cart;

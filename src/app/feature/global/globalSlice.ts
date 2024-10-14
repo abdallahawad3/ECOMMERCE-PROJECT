@@ -2,14 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface drawerState {
   isOpenCartDrawer: boolean;
+  isOpenDialog: boolean;
 }
 
 const initialState: drawerState = {
   isOpenCartDrawer: false,
+  isOpenDialog: false,
 };
 
-const drawerSlice = createSlice({
-  name: "drawer",
+const globalSlice = createSlice({
+  name: "global",
   initialState,
   reducers: {
     onOpenCartDrawerAction: (state) => {
@@ -18,9 +20,20 @@ const drawerSlice = createSlice({
     onCloseCartDrawerAction: (state) => {
       state.isOpenCartDrawer = false;
     },
+    onOpenDialogAction: (state) => {
+      state.isOpenDialog = true;
+    },
+    onCloseDialogAction: (state) => {
+      state.isOpenDialog = false;
+    },
   },
 });
 
-export const { onCloseCartDrawerAction, onOpenCartDrawerAction } = drawerSlice.actions;
+export const {
+  onCloseCartDrawerAction,
+  onOpenCartDrawerAction,
+  onCloseDialogAction,
+  onOpenDialogAction,
+} = globalSlice.actions;
 
-export default drawerSlice.reducer;
+export default globalSlice.reducer;

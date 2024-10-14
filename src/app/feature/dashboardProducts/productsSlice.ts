@@ -1,50 +1,18 @@
-import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import axiosInstance from "../../../config/axios.config";
-import type { IProduct } from "../../../interfaces";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-interface productsState {
-  products: IProduct[];
-  loading: boolean;
-  error: null | unknown;
-}
-
-const initialState: productsState = {
-  products: [],
-  error: null,
-  loading: true,
-};
-
-export const getAllProducts = createAsyncThunk("products/getAllCategories", async (_, thunkAPI) => {
-  const { rejectWithValue } = thunkAPI;
-  try {
-    const { data } = await axiosInstance.get("/products?populate=*&sort=createdAt");
-    return data.data;
-  } catch (error) {
-    return rejectWithValue(error);
-  }
+const apiSlice = createApi({
+  reducerPath: "api",
+  tagTypes: ["Products"],
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:1337/api" }),
+  endpoints: (build) => ({
+    getDashboardProducts: build.query({
+      query: (arg) => {
+        console.log(arg);
+        return `products?populate=*`;
+      },
+    }),
+  }),
 });
 
-const productsSlice = createSlice({
-  name: "products",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getAllProducts.pending, (state: productsState) => {
-      state.loading = true;
-    });
-    builder.addCase(
-      getAllProducts.fulfilled,
-      (state: productsState, action: PayloadAction<IProduct[]>) => {
-        state.loading = false;
-        state.products = action.payload;
-      }
-    );
-    builder.addCase(getAllProducts.rejected, (state: productsState, action) => {
-      state.loading = false;
-      state.products = [];
-      state.error = action.payload;
-    });
-  },
-});
-
-export default productsSlice.reducer;
+export const { useGetDashboardProductsQuery } = apiSlice;
+export default apiSlice;

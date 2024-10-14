@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import shoppingCartSlice from "./feature/cart/CartSlice";
-import drawerSlice from "./feature/global/globalSlice";
+import globalSlice from "./feature/global/globalSlice";
 import categorySlice from "./feature/categories/CategoriesSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import productsSlice from "./feature/dashboardProducts/productsSlice";
+import apiSlice from "../app/feature/dashboardProducts/productsSlice";
 const persistConfig = {
   key: "cart",
   storage,
@@ -16,10 +16,14 @@ const persistedCart = persistReducer(persistConfig, shoppingCartSlice);
 export const store = configureStore({
   reducer: {
     cart: persistedCart,
-    products: productsSlice,
-    drawer: drawerSlice,
+    global: globalSlice,
     category: categorySlice,
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat([apiSlice.middleware]),
 });
 
 export const persister = persistStore(store);
