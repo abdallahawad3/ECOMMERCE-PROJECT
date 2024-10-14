@@ -1,4 +1,23 @@
-import { Button, Image, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Image,
+  Input,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { sliceText } from "../utils";
 import { useEffect, useState } from "react";
 import TableSkelton from "./TableSkelton";
@@ -11,9 +30,11 @@ import {
   useGetDashboardProductsQuery,
 } from "../app/feature/services/apiSlice";
 import type { IProduct } from "../interfaces";
+import CustomModal from "./ui/CustomModal";
 
 const DashboardProductTable = () => {
   const [productClickedId, setProductClickedId] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useAppDispatch();
   const { data, isLoading } = useGetDashboardProductsQuery({});
   const [destroyProduct, { isLoading: destroyLoading, isSuccess }] =
@@ -69,7 +90,11 @@ const DashboardProductTable = () => {
                       colorScheme="red">
                       <MdDelete />
                     </Button>
-                    <Button colorScheme="blue">
+                    <Button
+                      colorScheme="blue"
+                      onClick={() => {
+                        onOpen();
+                      }}>
                       <MdEdit />
                     </Button>
                   </Td>
@@ -85,6 +110,41 @@ const DashboardProductTable = () => {
         className="text-red-500"
         onDeleteHandler={() => destroyProduct(productClickedId)}
       />
+      <CustomModal isOpen={isOpen} onClose={onClose} title="Update Product">
+        <FormControl my={4}>
+          <FormLabel>Title</FormLabel>
+          <Input placeholder="Product Title" />
+        </FormControl>
+        <FormControl my={4}>
+          <FormLabel>Description</FormLabel>
+          <Input placeholder="Product Description" />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Price</FormLabel>
+          <NumberInput min={0}>
+            <NumberInputField />
+            <NumberInputStepper>
+              <NumberIncrementStepper />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          </NumberInput>
+        </FormControl>
+        <FormControl>
+          <FormLabel>Stock</FormLabel>
+          <NumberInput min={0}>
+            <NumberInputField />
+            <NumberInputStepper>
+              <NumberIncrementStepper />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          </NumberInput>
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>Image</FormLabel>
+          <Input type="file" />
+        </FormControl>
+      </CustomModal>
     </>
   );
 };
