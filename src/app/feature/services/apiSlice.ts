@@ -34,8 +34,37 @@ const apiSlice = createApi({
       },
       invalidatesTags: [{ type: "Products", id: "LIST" }],
     }),
+    updateDashboardProduct: build.mutation({
+      query: ({ id, formBody }) => ({
+        url: `products/${id}`,
+        method: "PUT",
+        body: formBody,
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          Accept: "multipart/form-data",
+        },
+      }),
+      onQueryStarted: async ({ id, ...patch }, { dispatch, queryFulfilled }) => {
+        const patchResult = dispatch(
+          apiSlice.util.updateQueryData("getDashboardProducts", id, (draft) => {
+            Object.assign(draft, patch);
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch (error) {
+          console.error("Request failed:", error);
+          patchResult.undo();
+        }
+      },
+      invalidatesTags: [{ type: "Products", id: "LIST" }],
+    }),
   }),
 });
 
-export const { useGetDashboardProductsQuery, useDeleteDashboardProductMutation } = apiSlice;
+export const {
+  useGetDashboardProductsQuery,
+  useDeleteDashboardProductMutation,
+  useUpdateDashboardProductMutation,
+} = apiSlice;
 export default apiSlice;

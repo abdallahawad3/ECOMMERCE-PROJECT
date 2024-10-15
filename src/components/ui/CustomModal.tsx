@@ -17,6 +17,7 @@ interface IProps {
   okText?: string;
   isOpen: boolean;
   onClose: () => void;
+  onSubmit: () => void;
 }
 
 const CustomModal = ({
@@ -26,6 +27,7 @@ const CustomModal = ({
   children,
   isOpen,
   onClose,
+  onSubmit,
 }: IProps) => {
   return (
     <Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset="slideInBottom">
@@ -38,7 +40,9 @@ const CustomModal = ({
           <Button variant="ghost" mr={3} onClick={onClose}>
             {cancelTxt}
           </Button>
-          <Button colorScheme="blue">{okText}</Button>
+          <Button onClick={onSubmit} colorScheme="blue">
+            {okText}
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
