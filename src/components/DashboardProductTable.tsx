@@ -119,7 +119,7 @@ const DashboardProductTable = () => {
           <FormLabel>Description</FormLabel>
           <Input placeholder="Product Description" />
         </FormControl>
-        <FormControl>
+        <FormControl my={4}>
           <FormLabel>Price</FormLabel>
           <NumberInput min={0}>
             <NumberInputField />
@@ -129,7 +129,7 @@ const DashboardProductTable = () => {
             </NumberInputStepper>
           </NumberInput>
         </FormControl>
-        <FormControl>
+        <FormControl my={4}>
           <FormLabel>Stock</FormLabel>
           <NumberInput min={0}>
             <NumberInputField />
@@ -141,8 +141,8 @@ const DashboardProductTable = () => {
         </FormControl>
 
         <FormControl>
-          <FormLabel>Image</FormLabel>
-          <Input type="file" />
+          <FormLabel>Thumbnail</FormLabel>
+          <Input alignContent={"center"} type="file" />
         </FormControl>
       </CustomModal>
     </>
