@@ -1,50 +1,58 @@
-# React + TypeScript + Vite
+# Full-Stack Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a full-stack application built using **React.js**, **Redux**, and **Chakra UI** for the frontend, with **Strapi** as the backend API. The project features a dynamic and responsive user interface, state management with Redux, and a RESTful API powered by Strapi for handling data.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend**
 
-## Expanding the ESLint configuration
+  - **React.js**: Component-based architecture for building the user interface.
+  - **Redux**: Centralized state management for predictable behavior.
+  - **Chakra UI**: Styled component library for fast and beautiful UI development.
+  - Responsive design for seamless usage across devices.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Backend**
+  - **Strapi**: Headless CMS to build APIs quickly and efficiently.
+  - CRUD operations for managing resources via the Strapi admin panel and API endpoints.
+  - User authentication and role-based access control.
 
-- Configure the top-level `parserOptions` property like this:
+## Tech Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Frontend
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- **React.js**: Version 18+
+- **Redux**: For state management
+- **Chakra UI**: For styling and UI components
+- **Vite**: For fast development and build processes
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Backend
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- **Strapi**: Version 5 (Node.js Headless CMS)
+
+## Installation
+
+### Frontend (React.js)
+
+- 1: Clone the frontend repository:
+
+  ```bash
+  git clone https://github.com/abdallahawad3/ECOMMERCE-PROJECT
+  ```
+
+- 2: Navigate to the frontend directory and install dependencies:
+
+  ```bash
+  cd ECOMMERCE-PROJECT
+  ```
+
+- 3: install dependance:
+
+  ```bash
+  npm i
+  ```
+
+- 4: Run the frontend development server:
+
+  ```bash
+  npm run dev
+  ```

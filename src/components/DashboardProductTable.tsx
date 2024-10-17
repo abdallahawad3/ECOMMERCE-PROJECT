@@ -109,7 +109,7 @@ const DashboardProductTable = () => {
                 <Tr key={ele.id}>
                   <Td>{ele.id}</Td>
                   <Td>{sliceText(ele.title, 10)}</Td>
-                  <Td>{ele.categories[0].title}</Td>
+                  <Td>{ele.categories.title}</Td>
                   <Td>
                     <Image
                       src={`http://localhost:1337${ele.thumbnail.url}`}
