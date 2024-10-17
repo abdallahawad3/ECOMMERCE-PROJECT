@@ -21,6 +21,30 @@ export interface IProduct {
   ];
 }
 
+export interface IHeroCards {
+  id: number;
+  documentId: string;
+  title: string;
+  description: string;
+  image: {
+    id: number;
+    documentId: string;
+    name: string;
+    formats: {
+      large: {
+        name: string;
+        has: string;
+        ext: string;
+        mime: string;
+        width: number;
+        height: number;
+        size: number;
+        sizeInBytes: number;
+        url: string;
+      };
+    };
+  };
+}
 export interface ICategory {
   id: number;
   documentId: string;
