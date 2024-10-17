@@ -6,7 +6,7 @@ import ProductSkeleton from "./ProductSkeleton";
 const ProductsList = () => {
   const { data, isLoading } = useAuthenticationQuery({
     queryKey: ["data"],
-    url: "/products?populate=*&sort=createdAt",
+    url: "/products?populate=*&sort=title",
   });
 
   if (isLoading)

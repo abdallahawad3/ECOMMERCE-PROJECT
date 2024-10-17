@@ -12,7 +12,7 @@ export interface IProduct {
     name: string;
     url: string;
   };
-  category: [
+  categories: [
     {
       id: number;
       documentId: string;

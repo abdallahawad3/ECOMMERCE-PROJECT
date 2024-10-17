@@ -21,7 +21,7 @@ import {
 import { sliceText } from "../utils";
 import { useEffect, useState, type ChangeEvent } from "react";
 import TableSkelton from "./TableSkelton";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { MdDelete, MdEdit, MdPreview } from "react-icons/md";
 import { onOpenDialogAction } from "../app/feature/global/globalSlice";
 import Dialog from "./ui/Dialog";
 import { useAppDispatch } from "../app/store";
@@ -32,6 +32,7 @@ import {
 } from "../app/feature/services/apiSlice";
 import type { IProduct } from "../interfaces";
 import CustomModal from "./ui/CustomModal";
+import { useNavigate } from "react-router-dom";
 // import axiosInstance from "../config/axios.config";
 // import CookieService from "../services/CookieService";
 
@@ -39,6 +40,7 @@ const DashboardProductTable = () => {
   const [productClickedId, setProductClickedId] = useState("");
   const [productEditClicked, setProductEditClicked] = useState<IProduct>();
   const [thumbnail, setThumbnail] = useState<File>();
+  const navigate = useNavigate();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useAppDispatch();
@@ -107,7 +109,7 @@ const DashboardProductTable = () => {
                 <Tr key={ele.id}>
                   <Td>{ele.id}</Td>
                   <Td>{sliceText(ele.title, 10)}</Td>
-                  <Td>{ele.category[0].title}</Td>
+                  <Td>{ele.categories[0].title}</Td>
                   <Td>
                     <Image
                       src={`http://localhost:1337${ele.thumbnail.url}`}
@@ -121,6 +123,13 @@ const DashboardProductTable = () => {
                   <Td>{ele.price}</Td>
                   <Td>{ele.stock}</Td>
                   <Td>
+                    <Button
+                      onClick={() => {
+                        navigate(`/product/${ele.documentId}`);
+                      }}
+                      colorScheme="green">
+                      <MdPreview />
+                    </Button>
                     <Button
                       onClick={() => {
                         setProductClickedId(ele.documentId);

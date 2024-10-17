@@ -9,7 +9,7 @@ const apiSlice = createApi({
   endpoints: (build) => ({
     getDashboardProducts: build.query({
       query: () => {
-        return `products?populate=*`;
+        return `products?populate=*&sort=createdAt`;
       },
       providesTags: (result) =>
         result

@@ -17,7 +17,6 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import { MdArrowBack, MdLocalShipping } from "react-icons/md";
-// import useAuthenticationQuery from "../hooks/useCusomHook";
 import axiosInstance from "../config/axios.config";
 import { useEffect, useState } from "react";
 import type { IProduct } from "../interfaces";
@@ -29,6 +28,8 @@ const Product = () => {
   const [product, setProduct] = useState<IProduct>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  console.log(product);
+
   useEffect(() => {
     (async () => {
       try {
@@ -121,7 +122,7 @@ const Product = () => {
                   <Text as={"span"} fontWeight={"bold"}>
                     Category:
                   </Text>{" "}
-                  {product?.category[0].title}
+                  {product?.categories[0].title}
                 </ListItem>
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
